@@ -37,9 +37,6 @@ $(function() {
       $templateCache.put('templates/about.html',
         require('templates/about.html'));
 
-      $templateCache.put('templates/code-gen-error-modal.html',
-        require('templates/code-gen-error-modal.html'));
-
       $templateCache.put('templates/error-presenter.html',
         require('templates/error-presenter.html'));
 

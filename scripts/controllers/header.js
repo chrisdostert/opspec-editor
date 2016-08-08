@@ -2,7 +2,7 @@
 
 SwaggerEditor.controller('HeaderCtrl', function HeaderCtrl($scope, $uibModal,
   $stateParams, $state, $rootScope, Storage, Builder, FileLoader, Editor,
-  Codegen, Preferences, YAML, defaults, strings, $localStorage) {
+  Preferences, YAML, defaults, strings, $localStorage) {
   if ($stateParams.path) {
     $scope.breadcrumbs = [{active: true, name: $stateParams.path}];
   } else {
@@ -35,47 +35,6 @@ SwaggerEditor.controller('HeaderCtrl', function HeaderCtrl($scope, $uibModal,
     showIntro: !defaults.disableNewUserIntro
   });
   $rootScope.showAbout = $localStorage.showIntro;
-
-  // -- Client and Server menus
-  $scope.disableCodeGen = defaults.disableCodeGen;
-
-  if (!defaults.disableCodeGen) {
-    Codegen.getServers().then(function(servers) {
-      $scope.servers = servers;
-    }, function() {
-      $scope.serversNotAvailable = true;
-    });
-
-    Codegen.getClients().then(function(clients) {
-      $scope.clients = clients;
-    }, function() {
-      $scope.clientsNotAvailable = true;
-    });
-  }
-
-  $scope.getSDK = function(type, language) {
-    Codegen.getSDK(type, language).then(noop, showCodegenError);
-  };
-
-  /**
-   * @param {object} resp - response
-  */
-  function showCodegenError(resp) {
-    $uibModal.open({
-      template: require('templates/code-gen-error-modal.html'),
-      controller: 'GeneralModal',
-      size: 'large',
-      resolve: {
-        data: function() {
-          if (resp.data) {
-            return resp.data;
-          }
-
-          return resp.config;
-        }
-      }
-    });
-  }
 
   $scope.showFileMenu = function() {
     return !defaults.disableFileMenu;
@@ -224,43 +183,5 @@ SwaggerEditor.controller('HeaderCtrl', function HeaderCtrl($scope, $uibModal,
         });
       }
     });
-  }
-
-  $scope.capitalizeGeneratorName = function(name) {
-    var names = {
-      'jaxrs': 'JAX-RS',
-      'nodejs-server': 'Node.js',
-      'scalatra': 'Scalatra',
-      'spring-mvc': 'Spring MVC',
-      'android': 'Android',
-      'async-scala': 'Async Scala',
-      'csharp': 'C#',
-      'CsharpDotNet2': 'C# .NET 2.0',
-      'qt5cpp': 'Qt 5 C++',
-      'java': 'Java',
-      'objc': 'Objective-C',
-      'php': 'PHP',
-      'python': 'Python',
-      'ruby': 'Ruby',
-      'scala': 'Scala',
-      'dynamic-html': 'Dynamic HTML',
-      'html': 'HTML',
-      'swagger': 'Swagger JSON',
-      'swagger-yaml': 'Swagger YAML',
-      'tizen': 'Tizen'
-    };
-
-    if (names[name]) {
-      return names[name];
-    }
-
-    return name.split(/\s+|\-/).map(function(word) {
-      return word[0].toUpperCase() + word.substr(1);
-    }).join(' ');
-  };
-
-  /** */
-  function noop() {
-
   }
 });
