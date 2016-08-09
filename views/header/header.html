@@ -1,7 +1,5 @@
 <div class="main-header">
 
-  <a href="http://swagger.io" target="_blank" class="logo" ng-if="!showHeaderBranding()"></a>
-
   <div ng-include="'templates/branding-left.html'" ng-if="showHeaderBranding()" class="branding-3rdparty"></div>
 
   <section class="menu-bar">
@@ -24,9 +22,6 @@
         </li>
         <li class="divider"></li>
         <li>
-          <a dropdown-toggle ng-click="openPasteJSON()" tabindex="-1" track-event="file paste-json"><i class="fa fa-clipboard"></i>&nbsp;<span>Paste JSON&hellip;</span></a>
-        </li>
-        <li>
           <a dropdown-toggle ng-click="openImportUrl()" tabindex="-1" track-event="file import url"><i class="fa fa-link"></i>&nbsp;<span>Import URL&hellip;</span></a>
         </li>
         <li>
@@ -34,12 +29,8 @@
         </li>
         <li class="divider"></li>
         <li>
-          <a download="swagger.yaml" data-downloadurl="{{yamlDownloadUrl}}"
-            href="{{yamlDownloadHref}}" tabindex="-1" track-event="file download yaml"><i class="fa fa-download"></i>&nbsp;<span>Download YAML</span></a>
-        </li>
-        <li>
-          <a download="swagger.json" downloadUrl="{{jsonDownloadUrl}}"
-            href="{{jsonDownloadHref}}" tabindex="-1" track-event="file download json"><i class="fa fa-download"></i>&nbsp;<span>Download JSON</span></a>
+          <a download="opspec.yml" data-downloadurl="{{yamlDownloadUrl}}"
+            href="{{yamlDownloadHref}}" tabindex="-1" track-event="file download yaml"><i class="fa fa-download"></i>&nbsp;<span>Download</span></a>
         </li>
       </ul>
     </div>
@@ -104,7 +95,7 @@
         <li>
           <a dropdown-toggle tabindex="-1" ng-click="openAbout()">
             <i class="fa fa-info-circle"></i>&nbsp;
-            <span>About Swagger Editor</span>
+            <span>About opspec editor</span>
           </a>
         </li>
         <li class="divider"></li>

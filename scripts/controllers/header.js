@@ -45,11 +45,12 @@ SwaggerEditor.controller('HeaderCtrl', function HeaderCtrl($scope, $uibModal,
   };
 
   $scope.newProject = function() {
-    FileLoader.loadFromUrl('spec-files/guide.yaml').then(function(value) {
-      $rootScope.editorValue = value;
-      Storage.save('yaml', value);
-      $state.go('home', {tags: null});
-    });
+    FileLoader.loadFromUrl('examples/docker/login/op.yml')
+      .then(function(value) {
+        $rootScope.editorValue = value;
+        Storage.save('yaml', value);
+        $state.go('home', {tags: null});
+      });
   };
 
   $scope.onFileMenuOpen = function() {
@@ -69,14 +70,6 @@ SwaggerEditor.controller('HeaderCtrl', function HeaderCtrl($scope, $uibModal,
     $uibModal.open({
       template: require('templates/url-import.html'),
       controller: 'UrlImportCtrl',
-      size: 'large'
-    });
-  };
-
-  $scope.openPasteJSON = function() {
-    $uibModal.open({
-      template: require('templates/paste-json.html'),
-      controller: 'PasteJSONCtrl',
       size: 'large'
     });
   };
@@ -132,56 +125,22 @@ SwaggerEditor.controller('HeaderCtrl', function HeaderCtrl($scope, $uibModal,
     YAML.load(yaml, function(error, json) {
       // Don't assign if there is an error
       if (error) {
-        return;
+        // return;
       }
 
-      // if `yaml` is JSON, convert it to YAML
-      var jsonParseError = null;
-      try {
-        JSON.parse(yaml);
-      } catch (error) {
-        jsonParseError = error;
-      }
-
-      var assign = function(yaml, json) {
-        // swagger and version should be a string to comfort with the schema
-        if (json.info.version) {
-          json.info.version = String(json.info.version);
-        }
-        if (json.swagger) {
-          if (json.swagger === 2) {
-            json.swagger = '2.0';
-          } else {
-            json.swagger = String(json.swagger);
-          }
-        }
-
-        json = JSON.stringify(json, null, 4);
-        var jsonBlob = new Blob([json], {type: MIME_TYPE});
-        $scope.jsonDownloadHref = window.URL.createObjectURL(jsonBlob);
-        $scope.jsonDownloadUrl = [
-          MIME_TYPE,
-          'swagger.json',
-          $scope.jsonDownloadHref
-        ].join(':');
-
-        // YAML
+      var assign = function(yaml) {
         var yamlBlob = new Blob([yaml], {type: MIME_TYPE});
         $scope.yamlDownloadHref = window.URL.createObjectURL(yamlBlob);
         $scope.yamlDownloadUrl = [
           MIME_TYPE,
-          'swagger.yaml',
+          'op.yml',
           $scope.yamlDownloadHref
         ].join(':');
       };
 
-      if (jsonParseError) {
-        assign(yaml, json);
-      } else {
-        YAML.dump(json, function(error, yamlStr) {
-          assign(yamlStr, json);
-        });
-      }
+      YAML.dump(json, function(error, yamlStr) {
+        assign(yamlStr);
+      });
     });
   }
 });

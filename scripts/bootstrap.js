@@ -55,9 +55,6 @@ $(function() {
       $templateCache.put('templates/operation.html',
         require('templates/operation.html'));
 
-      $templateCache.put('templates/paste-json.html',
-        require('templates/paste-json.html'));
-
       $templateCache.put('templates/path.html',
         require('templates/path.html'));
 

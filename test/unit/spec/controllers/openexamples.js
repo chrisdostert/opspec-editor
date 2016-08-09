@@ -44,7 +44,7 @@ describe('Controller: OpenExamplesCtrl', function() {
   });
 
   it('should select first example as selected file by default', function() {
-    expect(scope.selectedFile).to.equal('default.yaml');
+    expect(scope.selectedFile).to.equal('docker/build/op.yml');
   });
 
   it('honors defaults.examplesFolder configuration when opening files',

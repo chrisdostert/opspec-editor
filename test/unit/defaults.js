@@ -6,18 +6,16 @@
 
 SwaggerEditor.config(function($provide) {
   $provide.constant('defaults', {
-    disableCodeGen: true,
-    examplesFolder: 'spec-files/',
+    examplesFolder: 'examples/',
     editorOptions: {},
     exampleFiles: [
-      'default.yaml',
-      'heroku-pets.yaml',
-      'minimal.yaml',
-      'echo.yaml',
-      'petstore_simple.yaml',
-      'petstore_full.yaml',
-      'basic-auth.yaml',
-      'security.yaml'
+      "docker/build/op.yml",
+      "docker/build-login-push/op.yml",
+      "docker/login/op.yml",
+      "docker/push/op.yml",
+      "nodejs/debug/op.yml",
+      "nodejs/debug-node/op.yml",
+      "nodejs/install-deps/op.yml"
     ],
     autocompleteExtension: {},
     useBackendForStorage: false,
