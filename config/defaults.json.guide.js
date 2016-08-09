@@ -3,7 +3,7 @@
 /** *****************************************************************************
 * This is a guide for defaults.json configuration file. Please don't modify this
 * file for changing the settings, instead, modify defaults.json.
-* If you are using Swagger Editor as a dependency, Swagger Editor will make an
+* If you are using opspec editor as a dependency, opspec editor will make an
 * XHR request to '/config/defaults.json' to get it's settings.
 *******************************************************************************/
 
@@ -23,38 +23,11 @@ var defaults = {
   },
 
   /*
-   * Code generator endpoints s are used for generating servers and client
-   * Swagger Editor will GET list of server and client generators and POST to
-   * each `server` and `client` with Swagger document in body to download the
-   * product of the code generator.
-  */
-  codegen: {
-    /*
-     * Menu items are generated based on result of GET request to these
-     * endpoint
-    */
-    servers: 'http://generator.swagger.io/online/api/gen/servers',
-    clients: 'http://generator.swagger.io/online/api/gen/clients',
-
-    /*
-     * For each item in menu item, Swagger Editor will make calls to these
-     * endpoint to download the generated code accordingly
-    */
-    server: 'http://generator.swagger.io/online/api/gen/servers/{language}',
-    client: 'http://generator.swagger.io/online/api/gen/clients/{language}'
-  },
-
-  /*
-   *  Disables Code Generators
-  */
-  disableCodeGen: true,
-
-  /*
    * Folder that example files are located
    * Note that this string will be used in between two other url segments
    * so you always need the trailing and leading slashes
   */
-  examplesFolder: 'spec-files/',
+  examplesFolder: 'examples/',
 
   /*
    * Ace editor options. This object will overload existing editor options.
@@ -67,13 +40,13 @@ var defaults = {
    * example is a combination of `examplesFolder` and file name
   */
   exampleFiles: [
-    'default.yaml',
-    'heroku-pets.yaml',
-    'minimal.yaml',
-    'petstore_simple.yaml',
-    'petstore_full.yaml',
-    'basic-auth.yaml',
-    'security.yaml'
+    "docker/build/op.yml",
+    "docker/build-login-push/op.yml",
+    "docker/login/op.yml",
+    "docker/push/op.yml",
+    "nodejs/debug/op.yml",
+    "nodejs/debug-node/op.yml",
+    "nodejs/install-deps/op.yml"
   ],
 
   /*

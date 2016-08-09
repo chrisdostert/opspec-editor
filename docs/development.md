@@ -40,12 +40,12 @@ npm run build
 This will build a new version of the web app, ready for production
 
 ###  Configuration
-Swagger Editor will make an XHR GET call to `/config/defaults.json` to get it's settings before launch. If you are using Swagger Editor as a dependency or serving it statically, you can provide your own `defaults.json` at this endpoint to override default settings.
+opspec editor will make an XHR GET call to `/config/defaults.json` to get it's settings before launch. If you are using opspec editor as a dependency or serving it statically, you can provide your own `defaults.json` at this endpoint to override default settings.
 
-Swagger Editor is configured with a file, [`defaults.json`](../app/config/defaults.json).
+opspec editor is configured with a file, [`defaults.json`](../app/config/defaults.json).
 Read the [configuration guide](./config.md) and additional details
 in [`defaults.json.guide.js`](../app/config/defaults.json.guide.js)
-to learn how to configure Swagger Editor.
+to learn how to configure opspec editor.
 
 
 ### Running with Docker

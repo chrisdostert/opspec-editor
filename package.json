@@ -1,8 +1,8 @@
 {
   "name": "swagger-editor",
-  "version": "2.10.2",
+  "version": "2.10.3",
   "homepage": "https://github.com/swagger-api/swagger-editor",
-  "description": "Swagger Editor",
+  "description": "opspec editor",
   "license": "Apache-2.0",
   "files": [
     "index.html",
@@ -11,7 +11,7 @@
     "dist/",
     "config/",
     "images/",
-    "spec-files/",
+    "examples/",
     "robots.txt",
     "404.html",
     "README.md"
@@ -108,7 +108,7 @@
     "unit-test-watch": "karma start test/unit/karma.conf.js",
     "pree2e-test": "webdriver-manager update",
     "e2e-test": "protractor test/e2e/protractor.config.js",
-    "test": "npm run unit-test && npm run e2e-test",
+    "test": "npm run unit-test",
     "lint": "eslint . --format 'node_modules/eslint-friendly-formatter'",
     "gh-pages": "git checkout gh-pages && git merge --no-edit --no-ff origin/master && npm run build && git commit -a -m \"Update from master at $(git rev-parse --short master)\" && git push origin gh-pages && git checkout -"
   }

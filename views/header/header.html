@@ -1,7 +1,5 @@
 <div class="main-header">
 
-  <a href="http://swagger.io" target="_blank" class="logo" ng-if="!showHeaderBranding()"></a>
-
   <div ng-include="'templates/branding-left.html'" ng-if="showHeaderBranding()" class="branding-3rdparty"></div>
 
   <section class="menu-bar">
@@ -24,9 +22,6 @@
         </li>
         <li class="divider"></li>
         <li>
-          <a dropdown-toggle ng-click="openPasteJSON()" tabindex="-1" track-event="file paste-json"><i class="fa fa-clipboard"></i>&nbsp;<span>Paste JSON&hellip;</span></a>
-        </li>
-        <li>
           <a dropdown-toggle ng-click="openImportUrl()" tabindex="-1" track-event="file import url"><i class="fa fa-link"></i>&nbsp;<span>Import URL&hellip;</span></a>
         </li>
         <li>
@@ -34,12 +29,8 @@
         </li>
         <li class="divider"></li>
         <li>
-          <a download="swagger.yaml" data-downloadurl="{{yamlDownloadUrl}}"
-            href="{{yamlDownloadHref}}" tabindex="-1" track-event="file download yaml"><i class="fa fa-download"></i>&nbsp;<span>Download YAML</span></a>
-        </li>
-        <li>
-          <a download="swagger.json" downloadUrl="{{jsonDownloadUrl}}"
-            href="{{jsonDownloadHref}}" tabindex="-1" track-event="file download json"><i class="fa fa-download"></i>&nbsp;<span>Download JSON</span></a>
+          <a download="opspec.yml" data-downloadurl="{{yamlDownloadUrl}}"
+            href="{{yamlDownloadHref}}" tabindex="-1" track-event="file download yaml"><i class="fa fa-download"></i>&nbsp;<span>Download</span></a>
         </li>
       </ul>
     </div>
@@ -82,49 +73,6 @@
       </ul>
     </div>
 
-    <!-- Handling of Code Generator service availability issues -->
-    <span
-      class=" text-danger dropdown-toggle"
-      ng-if="serversNotAvailable">
-        Server code generator is unreachable!
-    </span>
-    <span
-      class=" text-danger dropdown-toggle"
-      ng-if="clientsNotAvailable">
-        Client code generator is unreachable!
-    </span>
-
-    <div class="dropdown" uib-dropdown ng-if="servers && servers.length && !disableCodeGen">
-      <button class="btn btn-default" id="ServerMenu" uib-dropdown-toggle>
-        <span>Generate Server</span>
-        <span class="caret"></span>
-      </button>
-      <ul uib-dropdown-menu class="dropdown-menu server-list">
-        <li ng-repeat="server in ::servers track by $index">
-          <a dropdown-toggle tabindex="-1" ng-click="getSDK('server', server)" track-event="generate-server {{server}}">
-            <i class="fa fa-download"></i>&nbsp;
-            <span class="name">{{capitalizeGeneratorName(server)}}</span>
-          </a>
-        </li>
-      </ul>
-    </div>
-
-    <div class="code-gen dropdown" uib-dropdown ng-if="clients && clients.length && !disableCodeGen">
-      <button class="btn btn-default" id="ClientMenu" uib-dropdown-toggle>
-        <span>Generate Client</span>
-        <span class="caret"></span>
-      </button>
-
-      <ul class="dropdown-menu client-list" uib-dropdown-menu>
-        <li ng-repeat="client in ::clients track by $index">
-          <a dropdown-toggle tabindex="-1" ng-click="getSDK('client', client)" track-event="generate-client {{client}}">
-            <i class="fa fa-download"></i>&nbsp;
-            <span class="name">{{capitalizeGeneratorName(client)}}</span>
-          </a>
-        </li>
-      </ul>
-    </div>
-
     <div class="help dropdown" uib-dropdown>
       <button class="dropdown-icon btn btn-default" id="helpMenu" uib-dropdown-toggle>
         <span>Help</span>
@@ -147,7 +95,7 @@
         <li>
           <a dropdown-toggle tabindex="-1" ng-click="openAbout()">
             <i class="fa fa-info-circle"></i>&nbsp;
-            <span>About Swagger Editor</span>
+            <span>About opspec editor</span>
           </a>
         </li>
         <li class="divider"></li>

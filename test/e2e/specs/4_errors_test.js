@@ -26,7 +26,7 @@ describe('Error Presenter', function() {
       .toContain('YAML Syntax Error');
   });
 
-  it('should show Swagger Error with invalid swagger', function() {
+  it('should show opspec error with invalid swagger', function() {
     var val = [
       'swagger: "2.0"',
       'info:',
@@ -44,10 +44,10 @@ describe('Error Presenter', function() {
     expect($('.error-presenter').isPresent()).toBe(true);
     expect($('.error-header h4').getText()).toContain('Error');
     expect($('.error-presenter .item h5.error').getText())
-      .toContain('Swagger Error');
+      .toContain('opspec error');
   });
 
-  it('should show swagger warning with a document that has warnings',
+  it('should show opspec warning with a document that has warnings',
     function() {
       var val = [
         'swagger: "2.0"',

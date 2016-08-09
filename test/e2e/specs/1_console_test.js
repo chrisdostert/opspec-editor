@@ -9,7 +9,7 @@
 describe('Console tests', function() {
   it('should load the app', function() {
     browser.get('/');
-    expect(browser.getTitle()).toContain('Swagger Editor');
+    expect(browser.getTitle()).toContain('opspec editor');
   });
 
   it('Should not have any console errors or warnings', function() {

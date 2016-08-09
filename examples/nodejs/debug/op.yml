@@ -1,0 +1,15 @@
+name: debug
+description: Ensures deps are installed and debugs the node app
+inputs:
+  - { name: NPM_CONFIG_REGISTRY, isSecret: true }
+  - { name: NPM_PKG_FILE, type: file }
+  - { name: MODULES_DIR, description: Can be used for caching, type: dir }
+outputs:
+  - { name: MODULES_DIR, type: dir }
+run:
+  serial:
+  - op: install-deps
+    args: [ NPM_CONFIG_REGISTRY, NPM_PKG_FILE, MODULES_DIR ]
+    results: [ MODULES_DIR ]
+  - op: debug-node
+    args: [ APP_PKG ]

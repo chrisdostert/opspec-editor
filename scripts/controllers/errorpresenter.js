@@ -63,9 +63,9 @@ SwaggerEditor.controller('ErrorPresenterCtrl', function ErrorPresenterCtrl(
   function getType(error) {
     if (error.code && error.message && error.path) {
       if (error.level > 500) {
-        return 'Swagger Error';
+        return 'opspec error';
       }
-      return 'Swagger Warning';
+      return 'opspec warning';
     }
 
     if (error.yamlError) {

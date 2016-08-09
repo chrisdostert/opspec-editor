@@ -3,7 +3,7 @@
 Configuration
 =============
 
-Swagger editor is configured from the file [`config/defaults.json`](../config/defaults.json).
+opspec editor is configured from the file [`config/defaults.json`](../config/defaults.json).
 To learn more about this file, please review [`config/defaults.json.guide.js`](../config/defaults.json.guide.js).
 
 Custom UI
@@ -15,8 +15,8 @@ and `/templates/branding-right.html` files to have custom header.
 It's possible to serve a custom CSS file at `/styles/branding.css` path to override editor's appearances.
 
 It's also possible to serve a custom JavaScript file at `/scripts/branding.js` to add 
-new functionalities to Swagger Editor. Using branding HTML pieces and branding JavaScript
-file you can add new controllers to Swagger Editor.
+new functionalities to opspec editor. Using branding HTML pieces and branding JavaScript
+file you can add new controllers to opspec editor.
 
 #### `disableFileMenu`
 Set to `true` to disable the editor menu
@@ -34,7 +34,7 @@ Disables the overlay introduction panel. It's enabled by default.
 External Hooks
 --------------
 
-Swagger Editor provides an API for executing arbitrary code on certain events.
+opspec editor provides an API for executing arbitrary code on certain events.
 
 To install a hook simply use `SwaggerEditor.on()` method. `.on()` method accepts two arguments,
 the first argument is the event name and the second argument is callback function that will be invoked when 

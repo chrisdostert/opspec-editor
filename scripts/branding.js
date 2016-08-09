@@ -1,6 +1,6 @@
 /*
- * branding.js can be used for overloading Swagger Editor behaviors
- * You can add new controllers to Swagger Editor with following syntax:
+ * branding.js can be used for overloading opspec editor behaviors
+ * You can add new controllers to opspec editor with following syntax:
  *
  * SwaggerEditor.controller('BrandingController', function($scope) { ... });
  *

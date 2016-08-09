@@ -2,7 +2,7 @@
 
 SwaggerEditor.controller('HeaderCtrl', function HeaderCtrl($scope, $uibModal,
   $stateParams, $state, $rootScope, Storage, Builder, FileLoader, Editor,
-  Codegen, Preferences, YAML, defaults, strings, $localStorage) {
+  Preferences, YAML, defaults, strings, $localStorage) {
   if ($stateParams.path) {
     $scope.breadcrumbs = [{active: true, name: $stateParams.path}];
   } else {
@@ -36,47 +36,6 @@ SwaggerEditor.controller('HeaderCtrl', function HeaderCtrl($scope, $uibModal,
   });
   $rootScope.showAbout = $localStorage.showIntro;
 
-  // -- Client and Server menus
-  $scope.disableCodeGen = defaults.disableCodeGen;
-
-  if (!defaults.disableCodeGen) {
-    Codegen.getServers().then(function(servers) {
-      $scope.servers = servers;
-    }, function() {
-      $scope.serversNotAvailable = true;
-    });
-
-    Codegen.getClients().then(function(clients) {
-      $scope.clients = clients;
-    }, function() {
-      $scope.clientsNotAvailable = true;
-    });
-  }
-
-  $scope.getSDK = function(type, language) {
-    Codegen.getSDK(type, language).then(noop, showCodegenError);
-  };
-
-  /**
-   * @param {object} resp - response
-  */
-  function showCodegenError(resp) {
-    $uibModal.open({
-      template: require('templates/code-gen-error-modal.html'),
-      controller: 'GeneralModal',
-      size: 'large',
-      resolve: {
-        data: function() {
-          if (resp.data) {
-            return resp.data;
-          }
-
-          return resp.config;
-        }
-      }
-    });
-  }
-
   $scope.showFileMenu = function() {
     return !defaults.disableFileMenu;
   };
@@ -86,11 +45,12 @@ SwaggerEditor.controller('HeaderCtrl', function HeaderCtrl($scope, $uibModal,
   };
 
   $scope.newProject = function() {
-    FileLoader.loadFromUrl('spec-files/guide.yaml').then(function(value) {
-      $rootScope.editorValue = value;
-      Storage.save('yaml', value);
-      $state.go('home', {tags: null});
-    });
+    FileLoader.loadFromUrl('examples/docker/login/op.yml')
+      .then(function(value) {
+        $rootScope.editorValue = value;
+        Storage.save('yaml', value);
+        $state.go('home', {tags: null});
+      });
   };
 
   $scope.onFileMenuOpen = function() {
@@ -110,14 +70,6 @@ SwaggerEditor.controller('HeaderCtrl', function HeaderCtrl($scope, $uibModal,
     $uibModal.open({
       template: require('templates/url-import.html'),
       controller: 'UrlImportCtrl',
-      size: 'large'
-    });
-  };
-
-  $scope.openPasteJSON = function() {
-    $uibModal.open({
-      template: require('templates/paste-json.html'),
-      controller: 'PasteJSONCtrl',
       size: 'large'
     });
   };
@@ -173,94 +125,22 @@ SwaggerEditor.controller('HeaderCtrl', function HeaderCtrl($scope, $uibModal,
     YAML.load(yaml, function(error, json) {
       // Don't assign if there is an error
       if (error) {
-        return;
+        // return;
       }
 
-      // if `yaml` is JSON, convert it to YAML
-      var jsonParseError = null;
-      try {
-        JSON.parse(yaml);
-      } catch (error) {
-        jsonParseError = error;
-      }
-
-      var assign = function(yaml, json) {
-        // swagger and version should be a string to comfort with the schema
-        if (json.info.version) {
-          json.info.version = String(json.info.version);
-        }
-        if (json.swagger) {
-          if (json.swagger === 2) {
-            json.swagger = '2.0';
-          } else {
-            json.swagger = String(json.swagger);
-          }
-        }
-
-        json = JSON.stringify(json, null, 4);
-        var jsonBlob = new Blob([json], {type: MIME_TYPE});
-        $scope.jsonDownloadHref = window.URL.createObjectURL(jsonBlob);
-        $scope.jsonDownloadUrl = [
-          MIME_TYPE,
-          'swagger.json',
-          $scope.jsonDownloadHref
-        ].join(':');
-
-        // YAML
+      var assign = function(yaml) {
         var yamlBlob = new Blob([yaml], {type: MIME_TYPE});
         $scope.yamlDownloadHref = window.URL.createObjectURL(yamlBlob);
         $scope.yamlDownloadUrl = [
           MIME_TYPE,
-          'swagger.yaml',
+          'op.yml',
           $scope.yamlDownloadHref
         ].join(':');
       };
 
-      if (jsonParseError) {
-        assign(yaml, json);
-      } else {
-        YAML.dump(json, function(error, yamlStr) {
-          assign(yamlStr, json);
-        });
-      }
+      YAML.dump(json, function(error, yamlStr) {
+        assign(yamlStr);
+      });
     });
-  }
-
-  $scope.capitalizeGeneratorName = function(name) {
-    var names = {
-      'jaxrs': 'JAX-RS',
-      'nodejs-server': 'Node.js',
-      'scalatra': 'Scalatra',
-      'spring-mvc': 'Spring MVC',
-      'android': 'Android',
-      'async-scala': 'Async Scala',
-      'csharp': 'C#',
-      'CsharpDotNet2': 'C# .NET 2.0',
-      'qt5cpp': 'Qt 5 C++',
-      'java': 'Java',
-      'objc': 'Objective-C',
-      'php': 'PHP',
-      'python': 'Python',
-      'ruby': 'Ruby',
-      'scala': 'Scala',
-      'dynamic-html': 'Dynamic HTML',
-      'html': 'HTML',
-      'swagger': 'Swagger JSON',
-      'swagger-yaml': 'Swagger YAML',
-      'tizen': 'Tizen'
-    };
-
-    if (names[name]) {
-      return names[name];
-    }
-
-    return name.split(/\s+|\-/).map(function(word) {
-      return word[0].toUpperCase() + word.substr(1);
-    }).join(' ');
-  };
-
-  /** */
-  function noop() {
-
   }
 });

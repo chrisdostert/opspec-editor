@@ -3,7 +3,7 @@
 var angular = require('angular');
 
 /*
- * Provide external hooks to various events in Swagger Editor
+ * Provide external hooks to various events in opspec editor
  *
  * # Usage
  * SwaggerEditor.on(EventName, Callback)

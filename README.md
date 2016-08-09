@@ -1,16 +1,16 @@
-# Swagger Editor
+# opspec editor
 
 [![Build Status](https://travis-ci.org/swagger-api/swagger-editor.svg?branch=master)](https://travis-ci.org/swagger-api/swagger-editor)
 [![Code Climate](https://codeclimate.com/github/swagger-api/swagger-editor/badges/gpa.svg)](https://codeclimate.com/github/swagger-api/swagger-editor)
 [![Dependency Status](https://david-dm.org/swagger-api/swagger-editor/status.svg)](https://david-dm.org/swagger-api/swagger-editor)
 [![devDependency Status](https://david-dm.org/swagger-api/swagger-editor/dev-status.svg)](https://david-dm.org/swagger-api/swagger-editor-#info=devDependencies)
 
-Swagger Editor lets you edit [Swagger API specifications](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md) in YAML inside your browser and to preview documentations in real time.
+opspec editor lets you edit [Swagger API specifications](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md) in YAML inside your browser and to preview documentations in real time.
 Valid Swagger JSON descriptions can then be generated and used with the full Swagger tooling (code generation, documentation, etc).
 
 **[LIVE DEMO](http://editor.swagger.io)**
 
-[![Screenshot of the Swagger Editor](docs/screenshot.png "Designing an API with the Swagger Editor")](http://editor.swagger.io)
+[![Screenshot of the opspec editor](docs/screenshot.png "Designing an API with the opspec editor")](http://editor.swagger.io)
 
 #### Running with Docker
 
@@ -25,12 +25,12 @@ docker run -p 80:8080 swaggerapi/swagger-editor
 
 #### Running Locally
 
-[**Download the latest release (v2.10.2)**](https://github.com/swagger-api/swagger-editor/releases/download/v2.10.2/swagger-editor.zip) and serve the static files via your HTTP server. If you don't have an HTTP server, you can use [`http-server`](https://www.npmjs.com/package/http-server) Node.js module.
+[**Download the latest release (v2.10.3)**](https://github.com/swagger-api/swagger-editor/releases/download/v2.10.3/swagger-editor.zip) and serve the static files via your HTTP server. If you don't have an HTTP server, you can use [`http-server`](https://www.npmjs.com/package/http-server) Node.js module.
 
 ###### Using `http-server` module:
 ```shell
 npm install -g http-server
-wget https://github.com/swagger-api/swagger-editor/releases/download/v2.10.2/swagger-editor.zip
+wget https://github.com/swagger-api/swagger-editor/releases/download/v2.10.3/swagger-editor.zip
 unzip swagger-editor.zip
 http-server swagger-editor
 ```
