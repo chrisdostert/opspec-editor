@@ -9,7 +9,6 @@
 require('scripts/router');
 
 // Services
-require('scripts/services/analytics.js');
 require('scripts/services/ast-manager.js');
 require('scripts/services/auth-manager.js');
 require('scripts/services/autocomplete.js');
@@ -51,7 +50,6 @@ require('scripts/directives/operation.js');
 require('scripts/directives/schemamodel.js');
 require('scripts/directives/scroll-into-view-when.js');
 require('scripts/directives/stop-event.js');
-require('scripts/directives/track-event.js');
 
 // Enums
 require('scripts/enums/defaults.js');

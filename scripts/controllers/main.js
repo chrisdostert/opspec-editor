@@ -4,9 +4,7 @@ var $ = require('jquery');
 
 SwaggerEditor.controller('MainCtrl', function MainCtrl(
   $scope, $rootScope, $stateParams, $location,
-  Editor, LocalStorage, FileLoader, Analytics, defaults) {
-  Analytics.initialize();
-
+  Editor, LocalStorage, FileLoader, defaults) {
   $rootScope.$on('$stateChangeStart', Editor.initializeEditor);
 
   // find a better way to add the branding class (grunt html template) (to do)

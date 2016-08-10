@@ -4,7 +4,7 @@ var _ = require('lodash');
 
 SwaggerEditor.controller('OpenExamplesCtrl', function OpenExamplesCtrl($scope,
   $uibModalInstance, $rootScope, $state, FileLoader, Builder, LocalStorage,
-  Analytics, defaults) {
+  defaults) {
   $scope.files = defaults.exampleFiles;
   $scope.selectedFile = defaults.exampleFiles[0];
 
@@ -23,8 +23,6 @@ SwaggerEditor.controller('OpenExamplesCtrl', function OpenExamplesCtrl($scope,
       $state.go('home', {tags: null});
       $uibModalInstance.close();
     }, $uibModalInstance.close);
-
-    Analytics.sendEvent('open-example', 'open-example:' + file);
   };
 
   $scope.cancel = $uibModalInstance.close;
