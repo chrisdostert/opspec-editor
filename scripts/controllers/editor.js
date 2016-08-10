@@ -3,7 +3,7 @@
 var _ = require('lodash');
 
 SwaggerEditor.controller('EditorCtrl', function EditorCtrl($scope, $rootScope,
-  Editor, Builder, Storage, ExternalHooks, Preferences) {
+  Editor, Builder, LocalStorage, ExternalHooks, Preferences) {
   var debouncedOnAceChange = getDebouncedOnAceChange();
 
   // if user changed the preferences of keyPressDebounceTime, update the
@@ -30,7 +30,7 @@ SwaggerEditor.controller('EditorCtrl', function EditorCtrl($scope, $rootScope,
   };
 
   Editor.ready(function() {
-    Storage.load('yaml').then(function(yaml) {
+    LocalStorage.load('yaml').then(function(yaml) {
       $rootScope.editorValue = yaml;
       onAceChange(true);
     });
@@ -40,7 +40,7 @@ SwaggerEditor.controller('EditorCtrl', function EditorCtrl($scope, $rootScope,
   function onAceChange() {
     var value = $rootScope.editorValue;
 
-    Storage.save('yaml', value);
+    LocalStorage.save('yaml', value);
     ExternalHooks.trigger('code-change', []);
   }
 });

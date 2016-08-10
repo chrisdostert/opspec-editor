@@ -3,8 +3,9 @@
 var _ = require('lodash');
 var angular = require('angular');
 
-SwaggerEditor.controller('UrlImportCtrl', function FileImportCtrl($scope,
-  $uibModalInstance, $localStorage, $rootScope, $state, FileLoader, Storage) {
+SwaggerEditor.controller('UrlImportCtrl', function FileImportCtrl(
+  $scope, $uibModalInstance, $localStorage, $rootScope, $state, FileLoader,
+  LocalStorage) {
   var results;
 
   $scope.url = null;
@@ -41,7 +42,7 @@ SwaggerEditor.controller('UrlImportCtrl', function FileImportCtrl($scope,
 
   $scope.ok = function() {
     if (angular.isString(results)) {
-      Storage.save('yaml', results);
+      LocalStorage.save('yaml', results);
       $rootScope.editorValue = results;
       $state.go('home', {tags: null});
     }

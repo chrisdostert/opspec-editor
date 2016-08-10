@@ -1,7 +1,7 @@
 'use strict';
 
 SwaggerEditor.controller('HeaderCtrl', function HeaderCtrl($scope, $uibModal,
-  $stateParams, $state, $rootScope, Storage, Builder, FileLoader, Editor,
+  $stateParams, $state, $rootScope, LocalStorage, Builder, FileLoader, Editor,
   Preferences, YAML, defaults, strings, $localStorage) {
   if ($stateParams.path) {
     $scope.breadcrumbs = [{active: true, name: $stateParams.path}];
@@ -48,7 +48,7 @@ SwaggerEditor.controller('HeaderCtrl', function HeaderCtrl($scope, $uibModal,
     FileLoader.loadFromUrl('examples/docker/login/op.yml')
       .then(function(value) {
         $rootScope.editorValue = value;
-        Storage.save('yaml', value);
+        LocalStorage.save('yaml', value);
         $state.go('home', {tags: null});
       });
   };

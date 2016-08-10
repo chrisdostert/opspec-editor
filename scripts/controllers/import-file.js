@@ -2,8 +2,9 @@
 
 var angular = require("angular");
 
-SwaggerEditor.controller('FileImportCtrl', function FileImportCtrl($scope,
-  $uibModalInstance, $rootScope, $localStorage, $state, FileLoader, Storage) {
+SwaggerEditor.controller('FileImportCtrl', function FileImportCtrl(
+  $scope, $uibModalInstance, $rootScope, $localStorage, $state,
+  FileLoader, LocalStorage) {
   var results;
 
   $scope.fileChanged = function($fileContent) {
@@ -17,7 +18,7 @@ SwaggerEditor.controller('FileImportCtrl', function FileImportCtrl($scope,
   $scope.ok = function() {
     if (angular.isString(results)) {
       $rootScope.editorValue = results;
-      Storage.save('yaml', results);
+      LocalStorage.save('yaml', results);
       $state.go('home', {tags: null});
     }
     $uibModalInstance.close();

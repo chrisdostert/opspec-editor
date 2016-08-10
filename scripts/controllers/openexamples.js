@@ -3,7 +3,7 @@
 var _ = require('lodash');
 
 SwaggerEditor.controller('OpenExamplesCtrl', function OpenExamplesCtrl($scope,
-  $uibModalInstance, $rootScope, $state, FileLoader, Builder, Storage,
+  $uibModalInstance, $rootScope, $state, FileLoader, Builder, LocalStorage,
   Analytics, defaults) {
   $scope.files = defaults.exampleFiles;
   $scope.selectedFile = defaults.exampleFiles[0];
@@ -18,7 +18,7 @@ SwaggerEditor.controller('OpenExamplesCtrl', function OpenExamplesCtrl($scope,
     var url = '/' + pathname + defaults.examplesFolder + file;
 
     FileLoader.loadFromUrl(url).then(function(value) {
-      Storage.save('yaml', value);
+      LocalStorage.save('yaml', value);
       $rootScope.editorValue = value;
       $state.go('home', {tags: null});
       $uibModalInstance.close();

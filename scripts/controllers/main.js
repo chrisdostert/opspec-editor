@@ -4,7 +4,7 @@ var $ = require('jquery');
 
 SwaggerEditor.controller('MainCtrl', function MainCtrl(
   $scope, $rootScope, $stateParams, $location,
-  Editor, Storage, FileLoader, Analytics, defaults) {
+  Editor, LocalStorage, FileLoader, Analytics, defaults) {
   Analytics.initialize();
 
   $rootScope.$on('$stateChangeStart', Editor.initializeEditor);
@@ -19,7 +19,7 @@ SwaggerEditor.controller('MainCtrl', function MainCtrl(
   */
   var assign = function(yaml) {
     if (yaml) {
-      Storage.save('yaml', yaml);
+      LocalStorage.save('yaml', yaml);
       $rootScope.editorValue = yaml;
     }
   };
@@ -28,11 +28,11 @@ SwaggerEditor.controller('MainCtrl', function MainCtrl(
   * Load Default or URL YAML
   */
   var loadYaml = function() {
-    Storage.load('yaml').then(function(yaml) {
+    LocalStorage.load('yaml').then(function(yaml) {
       var url;
       var disableProxy = false;
 
-      // If there is a url provided, override the storage with that URL
+      // If there is a url provided, override the localStorage with that URL
       if ($stateParams.import) {
         url = $stateParams.import;
         disableProxy = Boolean($stateParams['no-proxy']);

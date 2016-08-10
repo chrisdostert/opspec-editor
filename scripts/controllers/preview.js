@@ -4,9 +4,10 @@ var _ = require('lodash');
 var SparkMD5 = require('spark-md5');
 var angular = require('angular');
 
-SwaggerEditor.controller('PreviewCtrl', function PreviewCtrl(Storage, Builder,
-  ASTManager, Editor, FocusedPath, TagManager, Preferences, FoldStateManager,
-  $scope, $rootScope, $stateParams, $sessionStorage) {
+SwaggerEditor.controller('PreviewCtrl', function PreviewCtrl(
+  LocalStorage, Builder, ASTManager, Editor, FocusedPath, TagManager,
+  Preferences, FoldStateManager, $scope, $rootScope, $stateParams,
+  $sessionStorage) {
   $scope.loadLatest = loadLatest;
   $scope.tagIndexFor = TagManager.tagIndexFor;
   $scope.getAllTags = TagManager.getAllTags;
@@ -23,13 +24,13 @@ SwaggerEditor.controller('PreviewCtrl', function PreviewCtrl(Storage, Builder,
   $scope.listAllOperation = listAllOperation;
   $scope.listAllDefnitions = listAllDefnitions;
 
-  Storage.addChangeListener('yaml', update);
+  LocalStorage.addChangeListener('yaml', update);
   Preferences.onChange(function() {
     update($rootScope.editorValue);
   });
 
   /**
-   * Reacts to updates of YAML in storage that usually triggered by editor
+   * Reacts to updates of YAML in localStorage that usually triggered by editor
    * changes.
    * @param {object} latest - the swagger spec.
    * @param {boolean} force - updates the force.
